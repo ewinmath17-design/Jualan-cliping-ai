@@ -1,81 +1,124 @@
 import streamlit as st
 
-# Mengatur tampilan halaman
-st.set_page_config(page_title="AutoClip Cuan Engine - Promo Khusus", page_icon="🚨", layout="centered")
+# --- 1. SETUP HALAMAN ---
+st.set_page_config(page_title="PROMO: AutoClip Cuan Engine", page_icon="🚨", layout="centered")
 
-# CSS Kustom untuk mempercantik Landing Page
+# --- 2. KONFIGURASI LINK & GAMBAR ---
+# Masukkan Link WA Master di sini
+LINK_WA = "https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20mau%20beli%20AutoClip%20Cuan%20Engine%20harga%20promo%2099rb!"
+
+# Link Gambar Placeholder (Nanti Master bisa ganti link ini dengan link gambar produk Master sendiri)
+IMG_HERO = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" # Gambar ilustrasi FYP/TikTok
+IMG_MOCKUP = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" # Gambar ilustrasi Software/Laptop
+
+# --- 3. CSS KUSTOM (DESAIN PREMIUM & ANIMASI) ---
 st.markdown("""
 <style>
-    .pre-headline { text-align: center; color: #555; font-size: 16px; margin-bottom: 10px; }
-    .big-headline { text-align: center; color: #D32F2F; font-size: 38px; font-weight: 900; line-height: 1.2; font-family: 'Arial Black', sans-serif; margin-bottom: 20px; }
-    .sub-headline { text-align: center; color: #333; font-size: 20px; font-style: italic; margin-bottom: 30px; }
-    .body-text { font-size: 18px; color: #222; line-height: 1.6; }
-    .highlight { background-color: #FFFF00; font-weight: bold; }
-    .price-box { background-color: #FFF9C4; padding: 25px; border-radius: 12px; border: 3px dashed #FBC02D; text-align: center; margin: 30px 0; }
-    .price-coret { text-decoration: line-through; color: #999; font-size: 24px; }
-    .price-final { color: #D32F2F; font-size: 36px; font-weight: bold; margin-top: 10px; }
-    .cta-button { display: block; width: 100%; text-align: center; background-color: #28a745; color: white !important; padding: 18px; font-size: 24px; font-weight: bold; text-decoration: none; border-radius: 8px; margin-top: 20px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .cta-button:hover { background-color: #218838; transform: translateY(-2px); }
+    /* Latar belakang & Font */
+    .stApp { background-color: #FAFAFA; font-family: 'Inter', sans-serif; }
+    
+    /* Headline Premium */
+    .hero-title { text-align: center; color: #B71C1C; font-size: 36px; font-weight: 900; line-height: 1.2; margin-bottom: 15px; text-transform: uppercase; }
+    .hero-subtitle { text-align: center; color: #555; font-size: 18px; margin-bottom: 30px; font-style: italic; }
+    
+    /* Box Fitur */
+    .feature-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid #E53935; margin-bottom: 15px; }
+    .feature-title { font-weight: 800; font-size: 18px; color: #222; margin-bottom: 5px; }
+    
+    /* Box Harga */
+    .price-box { background: linear-gradient(135deg, #111 0%, #333 100%); color: white; padding: 35px 20px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 40px 0; border: 2px solid #FFD700; }
+    .price-coret { text-decoration: line-through; color: #aaa; font-size: 20px; }
+    .price-final { color: #FFD700; font-size: 48px; font-weight: 900; margin: 10px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    
+    /* Tombol Animasi Denyut (Pulse) */
+    .btn-wa { display: block; background: linear-gradient(to right, #25D366, #128C7E); color: white !important; text-align: center; padding: 18px 20px; font-size: 22px; font-weight: 900; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; margin-top: 15px; border: 2px solid white; }
+    .btn-wa:hover { transform: scale(1.05); background: linear-gradient(to right, #128C7E, #075E54); }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    
+    /* Teks Peringatan */
+    .urgency-text { text-align: center; color: #D32F2F; font-weight: bold; font-size: 16px; margin-top: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
-# --- BAGIAN HEADLINE ---
-st.markdown('<div class="pre-headline">Perhatian Khusus untuk: Affiliate TikTok, Content Creator "Faceless", dan Pemilik Akun Publik...</div>', unsafe_allow_html=True)
-st.markdown('<div class="big-headline">🚨 BAGAIMANA MENCETAK RATUSAN VIDEO VIRAL DALAM 10 MENIT, TANPA PERLU BUKA CAPCUT, DAN BISA DIKENDALIKAN DARI HP ANDA! 🚨</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-headline">Lupakan biaya langganan bulanan aplikasi bule yang mahal. Temukan "Pabrik Gaib" yang akan membedah video, memotong otomatis, dan menulis Judul Clickbait-nya. Cukup 1x Klik!</div>', unsafe_allow_html=True)
+# --- 4. BAGIAN HERO (ATAS) ---
+st.markdown('<div class="hero-title">🚨 CETAK RATUSAN VIDEO VIRAL DALAM 10 MENIT, TANPA PUSING EDITING! 🚨</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-subtitle">"Pabrik Gaib" yang akan membedah video panjang, memotong otomatis, dan menulis Judul Clickbait-nya. Cukup 1x Klik!</div>', unsafe_allow_html=True)
+
+# Menampilkan Gambar Hero Premium
+st.image(IMG_HERO, use_container_width=True, caption="Rahasia Mendominasi Algoritma Tanpa Lelah")
 
 st.divider()
 
-# --- BAGIAN MASALAH ---
+# --- 5. BAGIAN MASALAH & SOLUSI (KOLOM) ---
+col1, col2 = st.columns(2)
+
+with col1:
+    st.error("**❌ CARA LAMA (Melelahkan)**")
+    st.write("- Download video berjam-jam.")
+    st.write("- Plototin layar cari 'Hook' viral.")
+    st.write("- Potong manual di CapCut/Premiere.")
+    st.write("- Pusing mikir judul konten.")
+    st.write("- Bayar langganan AI bule Rp 300rb/bulan.")
+
+with col2:
+    st.success("**✅ CARA BARU (Auto-Cuan)**")
+    st.write("- Cukup Paste Link YouTube.")
+    st.write("- Robot AI mencari bagian terbaik.")
+    st.write("- Dipotong otomatis jadi vertikal.")
+    st.write("- Dibuatkan judul Clickbait.")
+    st.write("- Bayar 1x, pakai seumur hidup!")
+
+st.divider()
+
+# --- 6. MEKANISME UNIK (FITUR PRODUK) ---
+st.markdown("<h3 style='text-align: center; color: #222;'>💎 3 Fitur Gila yang Membuat Kompetitor Menangis:</h3><br>", unsafe_allow_html=True)
+
 st.markdown("""
-<div class="body-text">
-<p>Jujur saja...</p>
-<p>Membangun kolam <i>followers</i> di TikTok, Shopee Video, atau IG Reels itu <b>SANGAT MELELAHKAN</b>.</p>
-<p>Anda tahu persis bahwa rahasia FYP adalah: <span class="highlight">KONSISTENSI UPLOAD 3-5 VIDEO PER HARI.</span></p>
-<p>Tapi, realitanya:</p>
-<ul>
-    <li>❌ Anda harus <i>download</i> video podcast berjam-jam.</li>
-    <li>❌ Anda harus memelototi videonya untuk mencari "Hook" yang menarik.</li>
-    <li>❌ Anda harus memotongnya manual di aplikasi HP.</li>
-    <li>❌ Anda kebingungan memikirkan teks Judul Clickbait.</li>
-</ul>
-<p>Satu video saja bisa memakan waktu 1 jam. Kapan Anda punya waktu untuk menikmati hidup?</p>
-<p>Ada aplikasi AI luar negeri seperti OpusClip. Ya, mereka bagus. <b>TAPI HARGANYA GILA!</b> Anda harus bayar biaya langganan <b>Rp 300.000 SETIAP BULAN</b>.</p>
+<div class="feature-box">
+    <div class="feature-title">🎥 Teknologi Sutradara Kamera</div>
+    Video aslinya ada dua orang (Kiri dan Kanan)? AI kami tidak asal potong di tengah! Atur fokus lensa untuk mengunci wajah Host atau Tamu.
+</div>
+<div class="feature-box">
+    <div class="feature-title">✍️ Magic Auto-Copywriter</div>
+    Mesin membaca pikiran audiens dan <b>MENULISKAN JUDUL CLICKBAIT</b> untuk setiap klip secara otomatis!
+</div>
+<div class="feature-box">
+    <div class="feature-title">🛡️ Tameng Anti-Shadowban</div>
+    Manipulasi durasi 5% secara halus. Mesin TikTok akan mengira ini adalah video 100% baru buatan Anda. Bebas pelanggaran hak cipta!
 </div>
 """, unsafe_allow_html=True)
 
-# --- BAGIAN SOLUSI & MEKANISME ---
-st.header("Memperkenalkan: Kavling AutoClip Cuan Engine 🤖🎬")
-st.markdown("""
-<div class="body-text">
-<p>Ini BUKAN e-book teori. Ini adalah <b>SOFTWARE AI PRIBADI</b> yang Anda install di laptop Anda sendiri, dan luar biasanya... <b>Bisa Anda kendalikan lewat layar HP Anda!</b></p>
-<p>Dilengkapi 3 Mekanisme Unik yang bikin kompetitor menangis:</p>
-<ol>
-    <li>🎥 <b>Sutradara AI Otomatis:</b> Atur fokus kamera ke tengah, host, atau tamu!</li>
-    <li>✍️ <b>Auto-Copywriter AI:</b> AI membedah video dan menuliskan Judul Clickbait untuk Anda.</li>
-    <li>🛡️ <b>Tameng Anti-Shadowban:</b> Mesin menyelipkan manipulasi durasi super halus agar bebas peringatan <i>Unoriginal Content</i>!</li>
-</ol>
-</div>
-""", unsafe_allow_html=True)
+# Gambar Mockup Software
+st.image(IMG_MOCKUP, use_container_width=True, caption="Tampilan Software Premium AutoClip Cuan Engine")
 
-# --- BAGIAN PENAWARAN & HARGA ---
-st.markdown("""
+# --- 7. BAGIAN HARGA & TOMBOL CTA (CALL TO ACTION) ---
+st.markdown(f"""
 <div class="price-box">
-    <p style="font-size: 20px; font-weight: bold; margin-bottom: 5px;">Dapatkan Hak Milik Penuh Hari Ini!</p>
-    <p style="margin-bottom: 10px;">Bayar 1x, Nikmati Seumur Hidup (Tanpa Biaya Bulanan)</p>
+    <h3 style="color: white; margin-bottom: 5px;">HAK MILIK PENUH - SEUMUR HIDUP</h3>
+    <p style="color: #ddd;">Berhenti bayar langganan bulanan mahal!</p>
     <div class="price-coret">Harga Normal: Rp 499.000</div>
-    <div class="price-final">HANYA Rp 99.000</div>
+    <div class="price-final">Rp 99.000,-</div>
+    <a href="{LINK_WA}" target="_blank" class="btn-wa">👉 AMBIL LISENSI SAYA SEKARANG! 👈</a>
+    <div class="urgency-text">⚠️ Peringatan: Harga Early Bird ini hanya berlaku untuk 10 pembeli pertama hari ini.</div>
 </div>
 """, unsafe_allow_html=True)
 
-# --- TOMBOL CALL TO ACTION ---
-# GANTI LINK DI BAWAH INI DENGAN LINK WHATSAPP / SEJOLI / BERDU MASTER EWIN
-link_pembelian = "https://wa.me/6282293274916?text=Halo%20Admin,%20saya%20mau%20beli%20AutoClip%20Cuan%20Engine%20harga%20promo%2099rb!"
+# --- 8. BAGIAN FAQ (Tanya Jawab) ---
+st.markdown("<h4 style='text-align: center; margin-bottom: 20px;'>Sering Ditanyakan (FAQ)</h4>", unsafe_allow_html=True)
 
-st.markdown(f'<a href="{link_pembelian}" target="_blank" class="cta-button">👉 YA! SAYA MAU MESIN CUAN INI SEKARANG 👈</a>', unsafe_allow_html=True)
+with st.expander("Apakah butuh laptop spesifikasi dewa?"):
+    st.write("Tidak! Mesin ini sangat ringan. Bisa dijalankan di Windows 10/11 biasa. Proses render dilakukan dengan metode *Fast-Stream* yang efisien.")
 
-st.markdown("""
-<p style="text-align: center; color: #777; font-size: 14px; margin-top: 10px;">
-    <i>⚠️ PERINGATAN: Harga Rp 99.000 ini adalah Harga Early Bird. Harga akan segera naik kembali tanpa pemberitahuan.</i>
-</p>
-""", unsafe_allow_html=True)
+with st.expander("Apakah benar bisa dikendalikan lewat HP?"):
+    st.write("Sangat benar! Cukup nyalakan aplikasinya di laptop, Anda akan mendapatkan sebuah Link Lokal. Buka link tersebut di browser HP Anda saat terhubung di WiFi yang sama, dan Anda bisa memproduksi video sambil rebahan!")
+
+with st.expander("Bagaimana cara pengirimannya?"):
+    st.write("Setelah pembayaran terkonfirmasi via WhatsApp, Anda akan langsung menerima Link Google Drive berisi File Instalasi Resmi (ZIP) + Video Panduan Cara Pakainya.")
+
+st.markdown("---")
+st.caption("<p style='text-align: center;'>© 2024 Kavling Digital. All rights reserved.</p>", unsafe_allow_html=True)
